@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 
+window.swal = require('sweetalert2');
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
 try {
@@ -36,6 +37,3 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app'
-});

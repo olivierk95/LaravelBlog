@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('categories.index');
     }
 
     /**
@@ -49,9 +49,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -61,9 +61,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->all());
+        return redirect()->route('home')->with('ok', 'The category has been successfully modified.');
     }
 
     /**
@@ -72,8 +73,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return response()->json();
+    }
+
+    public function __construct() {
+        $this->middleware('ajax')->only('destroy');
     }
 }
